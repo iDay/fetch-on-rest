@@ -10,8 +10,11 @@ function getDefaultOptions(data, method) {
 
   if(method != 'raw')
     options.headers.Accept = 'application/json';
-
-  if(data !== undefined) {
+  
+  if(typeof(data) == "string") {
+    options.body = data;
+    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+  } else if(data !== undefined) {
     options.body = JSON.stringify(data);
     options.headers['Content-Type'] = 'application/json';
   }
